@@ -46,7 +46,7 @@
 ## 长期存活的对象将进入老年代
 
 - **固定对象年龄判定：** 虚拟机给每个对象定义一个年龄计数器，对象每在 Survivor 中熬过一次 Minor GC，年龄 +1，达到 `-XX:MaxTenuringThreshold` 设定值后，会被晋升到老年代，`-XX:MaxTenuringThreshold` 默认为 15；
-- **动态对象年龄判定：** Survivor 中有相同年龄的对象的空间总和大于 Survivor 空间的一半，那么，年龄大于或等于该年龄的对象直接晋升到老年代。
+- **动态对象年龄判定：** 满足低于或等于某个年龄的对象大小总和大于Survivor空间一半，那么年龄大于或等于该年龄得对象就可以直接进入老年代。
 
 
 
@@ -77,7 +77,7 @@ Java 8 彻底将永久代 (PermGen) 移除出了 HotSpot JVM，将其原有的�
 **移除 PermGen 后，方法区和字符串常量的位置：**
 
 - 方法区：移至 Metaspace；
-- 字符串常量：移至 Java Heap。
+- 字符串常量池：移至 Java Heap。
 
 **Metaspace 的位置：** 本地堆内存(native heap)。
 
